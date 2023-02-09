@@ -7,7 +7,7 @@ namespace Maze
     public class Player : MonoBehaviour
     {
         public float moveSpeed = 4f;
-        private Rigidbody _rb;
+        public Rigidbody _rb;
 
         void Start()
         {
@@ -20,6 +20,7 @@ namespace Maze
             float moveVertical = Input.GetAxis("Vertical");
             Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
             _rb.AddForce(movement * moveSpeed);
+            
         }
     }
 }

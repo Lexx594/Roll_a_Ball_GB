@@ -5,7 +5,7 @@ namespace Maze
 {
     public sealed class GameController : MonoBehaviour
     {
-        private InteractiveObject[] _interactiveObjects;
+        public InteractiveObject[] _interactiveObjects;
         private void Start()
         {
             _interactiveObjects = FindObjectsOfType<InteractiveObject>();

@@ -5,38 +5,36 @@ namespace Maze
 {
     public sealed class GreenBonus : InteractiveObject, IRotator
     {
-        private GameObject _spawnBonus;        
-
+        
         private void Start()
         {
             _spawnBonus = GameObject.Find("====BONUS====").gameObject;
+            _spawnBonus.GetComponent<GameController>()._interactiveObjects = FindObjectsOfType<InteractiveObject>();
         }
 
-
         protected override void Interaction()
-        {
-            //RandomBonus();
+        {            
             _spawnBonus.GetComponent<BonusSpawn>().AddNewBonus();
             _spawnBonus.GetComponent<Bonus>().RandomBonus();
             Destroy(gameObject);
         }
-
-
-        //private void OnTriggerEnter(Collider other)
+        //protected override void CollisionOfTwoObjects()
         //{
-        //    if (other.tag == "Bomb" || other.tag == "Bonus")
-        //    {
-        //        _spawnBonus.GetComponent<BonusSpawn>().AddNewBonus();
-        //        Destroy(gameObject);
-        //    }
+        //    Destroy(gameObject);
+        //    _spawnBonus.GetComponent<BonusSpawn>().AddNewBonus();            
         //}
 
-        //private void RandomBonus()
-        //{
-        //    var _healt = _player.GetComponent<Healthbar>();
-        //    _healt._playerHealth += 33.5f;
+        protected override void CollisionOfTwoObjects()
+        {
+            Invoke(nameof(ReturnBonus), 0.5f);
+            Destroy(gameObject);
+        }
 
-        //}
+        void ReturnBonus()
+        {
+            _spawnBonus.GetComponent<BonusSpawn>().AddNewBonus();
+        }
+
 
 
 

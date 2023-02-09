@@ -22,19 +22,18 @@ namespace Maze
 
         private void SpawnBonus()
         {
-            for (int i = 0; i < UnityEngine.Random.Range(_maxBonus, _minBonus); i++)
+            for (int i = 0; i < UnityEngine.Random.Range(_minBonus, _maxBonus); i++) 
             {
-                var spawn = UnityEngine.Random.Range(0, _spawnPoints.Count);
-                Instantiate(_bonus[UnityEngine.Random.Range(0, _bonus.Length)], _spawnPoints[spawn].transform.position, Quaternion.identity);
-                _spawnPoints.RemoveAt(spawn);
+                AddNewBonus();
             }
         }
 
-         public void AddNewBonus()
+        public void AddNewBonus()
         {
             var spawn = UnityEngine.Random.Range(0, _spawnPoints.Count);
             Instantiate(_bonus[UnityEngine.Random.Range(0, _bonus.Length)], _spawnPoints[spawn].transform.position, Quaternion.identity);
-            _spawnPoints.RemoveAt(spawn);
+            //_spawnPoints.RemoveAt(spawn);
+            //Debug.Log(spawn);
         }
     }
 }

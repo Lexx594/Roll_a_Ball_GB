@@ -11,7 +11,8 @@ namespace Maze
     public class Healthbar : MonoBehaviour
     {
         public float _playerHealth = 100;
-        [SerializeField] private Image _currentHealthBar;
+        [SerializeField] private Image _currentHealthBar;        
+        public bool _freezeHealth;
         
         
         // Start is called before the first frame update
@@ -33,6 +34,8 @@ namespace Maze
             {
                 _playerHealth = 100f;
             }
+           
+
 
 
 
