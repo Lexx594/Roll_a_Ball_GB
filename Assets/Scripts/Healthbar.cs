@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 namespace Maze
 {
-
-
     public class Healthbar : MonoBehaviour
     {
         public float _playerHealth = 100;
@@ -33,12 +31,38 @@ namespace Maze
             if (_playerHealth > 100f)
             {
                 _playerHealth = 100f;
-            }
-           
+            }           
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            //Debug.Log($" Столкновение с {other.name}");
+
+            if (other.tag == "Enemy" && !_freezeHealth && !gameObject.GetComponent<PlayerBall>()._isDisembodied)
+            {
+                _playerHealth -= 33.5f;
+                FreezeHealthOnAvtoOff();
+            }            
+        }
+
+        public void FreezeHealthOn()
+        {
+            _freezeHealth = true;
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        public void FreezeHealthOnAvtoOff()
+        {
+            _freezeHealth = true;
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            Invoke(nameof(FreezeHealthOff), 10f);
+        }
 
 
-
-
+        public void FreezeHealthOff()
+        { 
+            _freezeHealth = false;
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 }

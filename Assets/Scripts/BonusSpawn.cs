@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Maze
@@ -31,9 +32,23 @@ namespace Maze
         public void AddNewBonus()
         {
             var spawn = UnityEngine.Random.Range(0, _spawnPoints.Count);
-            Instantiate(_bonus[UnityEngine.Random.Range(0, _bonus.Length)], _spawnPoints[spawn].transform.position, Quaternion.identity);
-            //_spawnPoints.RemoveAt(spawn);
-            //Debug.Log(spawn);
+            Collider[] overlappedColliders = Physics.OverlapSphere(_spawnPoints[spawn].transform.position, 1);
+            //Debug.Log(overlappedColliders.Length);
+
+            for (int i = 0; i < overlappedColliders.Length; i++)
+            {
+                if (overlappedColliders[i].gameObject.GetComponent<GreenBonus>() != null ||
+                    overlappedColliders[i].gameObject.GetComponent<RedBonus>() != null ||
+                    overlappedColliders[i].gameObject.GetComponent<Bomb>() != null)
+                {
+                    AddNewBonus();
+                    break;
+                }
+                if (i == overlappedColliders.Length -1)
+                {
+                    Instantiate(_bonus[UnityEngine.Random.Range(0, _bonus.Length)], _spawnPoints[spawn].transform.position + Vector3.up * 0.5f, Quaternion.identity);
+                }
+            }          
         }
     }
 }

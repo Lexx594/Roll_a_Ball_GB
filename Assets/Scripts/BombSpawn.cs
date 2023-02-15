@@ -8,7 +8,7 @@ namespace Maze
 
     public class BombSpawn : MonoBehaviour
     {
-        [SerializeField] private GameObject _bomb;
+        [SerializeField] private GameObject _bombPrefab;
         [SerializeField] private List<Transform> _spawnPoints;
         [SerializeField] private int _maxBombs;
         [SerializeField] private int _minBombs;
@@ -17,15 +17,15 @@ namespace Maze
         private void Awake()
         {
             _spawnPoints = new List<Transform>(_spawnPoints);
-            SpawnBonus();
+            SpawnBombs();
         }
 
-        private void SpawnBonus()
+        private void SpawnBombs()
         {
-            for (int i = 0; i < UnityEngine.Random.Range(_maxBombs, _minBombs); i++)
+            for (int i = 0; i < UnityEngine.Random.Range(_minBombs, _maxBombs+1); i++)
             {
                 var spawn = UnityEngine.Random.Range(0, _spawnPoints.Count);
-                Instantiate(_bomb, _spawnPoints[spawn].transform.position, Quaternion.identity);
+                Instantiate(_bombPrefab, _spawnPoints[spawn].transform.position, Quaternion.identity);
                 _spawnPoints.RemoveAt(spawn);
             }
         }

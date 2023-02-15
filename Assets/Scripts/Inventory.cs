@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -12,13 +11,19 @@ public class Inventory : MonoBehaviour
     public int map = 0;
     public int scaner = 0;
     public int marks = 0;
+    
 
+    [SerializeField] private LayerMask _scanerlayerMask;
+    [SerializeField] private GameObject _scsnerPingPrefab;
     private float _timerTime;
+
+    
 
     [SerializeField] private GameObject _activeBombPrefab;
     [SerializeField] private GameObject _markPrefab;
     [SerializeField] private GameObject _inventorySlots;
     [SerializeField] private GameObject _minimap;
+    [SerializeField] private GameObject _scaner;
     [SerializeField] private TextMeshProUGUI _inventoryLabel;
     [SerializeField] private TextMeshProUGUI _timerLabel;
 
@@ -26,7 +31,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private AudioSource _audsMark;
     [SerializeField] private AudioSource _audsScaner;
-    [SerializeField] private AudioSource _audsScanerActive;
+    //[SerializeField] private AudioSource _audsScanerActive;
     [SerializeField] private AudioSource _audsMap;
       
 
@@ -68,11 +73,14 @@ public class Inventory : MonoBehaviour
         else _inventoryLabel.gameObject.SetActive(false);
 
         if (map > 1) map = 1;
-        if (scaner > 1) scaner = 1;
 
+        if (scaner == 1) _scaner.GetComponent<Scaner>().levelScaner = 1;
+        else if (scaner == 2) _scaner.GetComponent<Scaner>().levelScaner = 2;
+        else if (scaner == 3) _scaner.GetComponent<Scaner>().levelScaner = 3;
+        else if (scaner > 3) scaner = 3;
 
-        //Таймер сканера
-        if (_timerTime > 0f)
+            //Таймер сканера
+            if (_timerTime > 0f)
         {            
             _timerTime -= Time.deltaTime;
             _timerLabel.color = Color.yellow;
@@ -83,8 +91,6 @@ public class Inventory : MonoBehaviour
             _timerTime = -1f;
             RechargeScaner();
         }
-
-
     }
 
     public void PutABomb()
@@ -111,29 +117,50 @@ public class Inventory : MonoBehaviour
 
     private void Scaner()
     {
-        _timerTime = 15f;
+        _timerTime = 60f;
+        if (map == 0)
+        {
+            _minimap.gameObject.SetActive(true);
+            _miniMapActive = true;
+            _miniMapCamera.cullingMask = 1 << 9; //| 1<<7;
+        }
+        else
+        { 
+            _miniMapCamera.cullingMask = 1 << 0 | 1 << 9;
+            _minimap.gameObject.SetActive(true);
+            _miniMapActive = true;
+            _audsMap.Play();
+        }
+        _timerLabel.gameObject.SetActive(true);
+        _scaner.GetComponent<Scaner>().scanerOff = true;
         _scanerRecharge = true;
-        _minimap.transform.GetChild(1).gameObject.SetActive(true);
-        _miniMapCamera.cullingMask = 1<<0| 1<<3 | 1<<7;
-        _audsScaner.Play();
-        _audsScanerActive.Play();
+         
+        _audsScaner.Play();      
+
     }
 
     private void RechargeScaner()
     {
-        
-        _audsScanerActive.Stop();
+        _scaner.GetComponent<Scaner>().scanerOff = false;
+        if (map == 0)
+        {
+            _minimap.gameObject.SetActive(false);
+            _miniMapActive = false;
+            _miniMapCamera.cullingMask = 1 << 4; 
+        }
+        else _miniMapCamera.cullingMask = 1 << 0; 
         _miniMapCamera.cullingMask = 1;        
         _timerLabel.color = Color.red;
         _timerLabel.text = "Перезарядка сканера";
-        Invoke(nameof(ScanerReady), 60f);
+        Invoke(nameof(ScanerReady), 120f);
     }
 
     private void ScanerReady()
     {
         _scanerRecharge = false;
         _audsScaner.Play();
-        _minimap.transform.GetChild(1).gameObject.SetActive(false);
+        
+        _timerLabel.gameObject.SetActive(false);
     }
 
     private void Marker()

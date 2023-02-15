@@ -1,6 +1,5 @@
 using UnityEngine;
 using Maze.Interface;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Maze
 {
@@ -20,16 +19,16 @@ namespace Maze
             _spawnBonus.GetComponent<Bonus>().RandomBonus();
             Destroy(gameObject);
         }
-        protected override void CollisionOfTwoObjects()
-        {
-            Invoke(nameof(ReturnBonus), 0.5f);
-            Destroy(gameObject);                       
-        }
+        //protected override void CollisionOfTwoObjects()
+        //{
+        //    Invoke(nameof(ReturnBonus), 0.5f);
+        //    Destroy(gameObject);                       
+        //}
 
-        void ReturnBonus()
-        {
-            _spawnBonus.GetComponent<BonusSpawn>().AddNewBonus();
-        }
+        //void ReturnBonus()
+        //{
+        //    _spawnBonus.GetComponent<BonusSpawn>().AddNewBonus();
+        //}
 
 
         public void Flay()

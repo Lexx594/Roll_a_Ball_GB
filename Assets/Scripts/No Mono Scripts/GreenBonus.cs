@@ -24,16 +24,16 @@ namespace Maze
         //    _spawnBonus.GetComponent<BonusSpawn>().AddNewBonus();            
         //}
 
-        protected override void CollisionOfTwoObjects()
-        {
-            Invoke(nameof(ReturnBonus), 0.5f);
-            Destroy(gameObject);
-        }
+        //protected override void CollisionOfTwoObjects()
+        //{
+        //    Invoke(nameof(ReturnBonus), 0.5f);
+        //    Destroy(gameObject);
+        //}
 
-        void ReturnBonus()
-        {
-            _spawnBonus.GetComponent<BonusSpawn>().AddNewBonus();
-        }
+        //void ReturnBonus()
+        //{
+        //    _spawnBonus.GetComponent<BonusSpawn>().AddNewBonus();
+        //}
 
 
 

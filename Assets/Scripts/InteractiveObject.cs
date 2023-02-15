@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +15,10 @@ namespace Maze
             Destroy(gameObject);
         }
 
-        protected virtual void CollisionOfTwoObjects()
-        {
-            //Destroy(gameObject);
-        }
+        //protected virtual void CollisionOfTwoObjects()
+        //{
+        //    //Destroy(gameObject);
+        //}
 
         private void OnTriggerEnter(Collider other)
         {
@@ -29,9 +30,10 @@ namespace Maze
             }
 
             if (other.tag == "Bomb" || other.tag == "Bonus")
-            {                
-                //Debug.Log($" Столкновение с {other.tag}");
-                CollisionOfTwoObjects();                                
+            {
+                throw new Exception("два интерактивных объекта в одной точке");
+                
+                //CollisionOfTwoObjects();                                
             }
         }
     }
