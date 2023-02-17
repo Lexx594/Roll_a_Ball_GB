@@ -38,6 +38,13 @@ public class Inventory : MonoBehaviour
     private bool _miniMapActive;
     private bool _scanerRecharge;
 
+    private void Awake()
+    {
+        bombs = DataHolder.bombs;
+        map = DataHolder.map;
+        scaner = DataHolder.scaner;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && bombs > 0) PutABomb();
@@ -106,6 +113,7 @@ public class Inventory : MonoBehaviour
             _minimap.gameObject.SetActive(true);
             _miniMapActive = true;
             _audsMap.Play();
+            if (_scanerRecharge) _miniMapCamera.cullingMask = 1 << 0 | 1 << 9;
         }
         else
         {

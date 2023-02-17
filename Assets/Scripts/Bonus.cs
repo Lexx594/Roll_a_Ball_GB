@@ -22,7 +22,7 @@ namespace Maze
         private void Start()
         {            
             _player = GameObject.Find("Player").gameObject;
-
+            ResetBonus();
         }
 
         private void Update()
@@ -105,7 +105,7 @@ namespace Maze
             ResetBonus();
             _audsGoodBonus.Play();
             _timerTime = 30f;
-            _player.GetComponent<PlayerBall>().moveSpeed = 15f;
+            _player.GetComponent<PlayerBall>().moveSpeed = DataHolder.moveSpeed * 1.5f;
             _message.GetComponent<TextMeshProUGUI>().text = Message("ускорение");
             _effects.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
             _effects.transform.GetChild(0).gameObject.SetActive(true);
@@ -117,7 +117,7 @@ namespace Maze
             ResetBonus();
             _audsBadBonus.Play();
             _timerTime = 30f;
-            _player.GetComponent<PlayerBall>().moveSpeed = 4f;
+            _player.GetComponent<PlayerBall>().moveSpeed = DataHolder.moveSpeed/2;
             _message.GetComponent<TextMeshProUGUI>().text = Message("замедление");
             _effects.transform.GetChild(2).transform.GetChild(1).gameObject.SetActive(true);
             _effects.transform.GetChild(0).gameObject.SetActive(true);
@@ -150,7 +150,7 @@ namespace Maze
 
         private void ResetBonus()
         {
-            _player.GetComponent<PlayerBall>().moveSpeed = 10f;
+            _player.GetComponent<PlayerBall>().moveSpeed = DataHolder.moveSpeed;
             _effects.transform.GetChild(0).gameObject.SetActive(false);
             _effects.transform.GetChild(1).gameObject.SetActive(false);
             _effects.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(false);

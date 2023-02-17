@@ -6,13 +6,14 @@ namespace Maze
 {
     public class Player : MonoBehaviour
     {
-        public float moveSpeed = 10f;
+        public float moveSpeed;
         public Rigidbody _rb;
         //public bool _step;
 
         void Start()
         {
             _rb = GetComponent<Rigidbody>();
+            moveSpeed = DataHolder.moveSpeed;
         }
 
         protected void Move()

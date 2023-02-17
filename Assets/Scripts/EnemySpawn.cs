@@ -20,6 +20,8 @@ namespace Maze
         private void Awake()
         {
             _spawnPoints = new List<Transform>(_spawnPoints);
+            _maxEnemys = DataHolder.maxEnemys;
+            _minEnemys = DataHolder.minEnemys;
             _enemyCount = UnityEngine.Random.Range(_minEnemys, _maxEnemys + 1);
             SpawnEnemy();
             if (_enemyCount == 1)
@@ -56,7 +58,7 @@ namespace Maze
             }
             if (leftKillEnemy == 0)
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(4);
             }
 
         }

@@ -25,7 +25,7 @@ namespace Maze
             _currentHealthBar.fillAmount = _playerHealth/100;
             if (_playerHealth < 0f)
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(3);
             }
 
             if (_playerHealth > 100f)

@@ -18,6 +18,8 @@ namespace Maze
         private void Awake()
         {
             _spawnPoints = new List<Transform>(_spawnPoints);
+            _maxBonus = DataHolder.maxBonus;
+            _minBonus = DataHolder.minBonus;            
             SpawnBonus();
         }
 

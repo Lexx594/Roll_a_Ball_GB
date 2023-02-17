@@ -17,6 +17,8 @@ namespace Maze
         private void Awake()
         {
             _spawnPoints = new List<Transform>(_spawnPoints);
+            _maxBombs = DataHolder.maxBombs;
+            _minBombs = DataHolder.minBombs;
             SpawnBombs();
         }
 
