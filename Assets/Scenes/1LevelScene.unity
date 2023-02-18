@@ -69003,10 +69003,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 981434068811208371, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 981434068811208373, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -69077,7 +69073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 981434068811208373, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 981434068811208373, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

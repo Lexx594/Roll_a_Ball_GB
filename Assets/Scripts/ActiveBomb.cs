@@ -53,28 +53,40 @@ namespace Maze
                 Rigidbody rb = overlappedColliders[i].attachedRigidbody;
                 if (rb != null)
                 {
-                    rb.AddExplosionForce(_force, transform.position, _radius);
+                    var direction = rb.transform.position - transform.position;
+                    RaycastHit hit;
+                    Ray ray = new Ray(transform.position, direction);
 
-                    Bomb staticBomb = rb.GetComponent<Bomb>();
-                    if (staticBomb != null) { staticBomb.BombDestroy(); }
-
-                    Healthbar playerDamage = rb.GetComponent<Healthbar>();
-                    if (playerDamage != null && !playerDamage._freezeHealth)
+                    if (Physics.Raycast(ray, out hit, _radius))
                     {
-                        playerDamage._playerHealth -= 33.5f;
-                        playerDamage.FreezeHealthOnAvtoOff();
-                    }
+                        if (hit.collider != null)
+                        {
+                            if (hit.collider.gameObject == rb.gameObject)
+                            {
+                                rb.AddExplosionForce(_force, transform.position, _radius);
 
-                    Enemy enemy = rb.GetComponent<Enemy>();
-                    if (enemy != null)
-                    {
-                        _enemySpawn.GetComponent<EnemySpawn>().leftKillEnemy -= 1;
-                        enemy.EnemyDestroy();
+                                Bomb staticBomb = rb.GetComponent<Bomb>();
+                                if (staticBomb != null) { staticBomb.BombDestroy(); }
+                                //staticBomb? staticBomb.BombDestroy(); 
+
+                                Healthbar playerDamage = rb.GetComponent<Healthbar>();
+                                if (playerDamage != null && !playerDamage._freezeHealth)
+                                {
+                                    playerDamage._playerHealth -= 33.5f;
+                                    playerDamage.FreezeHealthOnAvtoOff();
+                                }
+
+                                Enemy enemy = rb.GetComponent<Enemy>();
+                                if (enemy != null)
+                                {
+                                    _enemySpawn.GetComponent<EnemySpawn>().leftKillEnemy -= 1;
+                                    enemy.EnemyDestroy();
+                                }
+                            }
+                        }
                     }
                 }
-
             }
-
             Invoke(nameof(BombDestroy), 2f);
         }
 
