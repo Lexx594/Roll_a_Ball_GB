@@ -34,7 +34,9 @@ namespace MazeMenu
         private int _bombs = 5;
         private int _map = 1;
         private int _scaner = 0;
-              
+        private int _saveCount = 2;
+
+
 
         private void Awake()
         {
@@ -69,6 +71,7 @@ namespace MazeMenu
             DataHolder.bombs = _bombs;
             DataHolder.map = _map;
             DataHolder.scaner = _scaner;
+            DataHolder.saveCount = _saveCount;
             _loadScene.SetActive(true);
             StartCoroutine(AsyncLoad());            
         }
@@ -102,6 +105,7 @@ namespace MazeMenu
                         _bombs = 10;
                         _map = 1;
                         _scaner = 1;
+                        _saveCount = 3;
                         TextDropdown();
                         break; 
                     }
@@ -117,6 +121,7 @@ namespace MazeMenu
                         _bombs = 5;
                         _map = 1;
                         _scaner = 0;
+                        _saveCount = 2;
                         TextDropdown();
                         break;
                     }                    
@@ -133,6 +138,7 @@ namespace MazeMenu
                         _bombs = 2;
                         _map = 0;
                         _scaner = 0;
+                        _saveCount = 1;
                         TextDropdown();
                         break;
                     }
@@ -157,8 +163,8 @@ namespace MazeMenu
                 $"Ускорение игрока - {moveSpeed}\n" +
                 $"Бомб в инвентаре - {_bombs}\n" +
                 $"Карта в инвентаре - {map}\n" +
-                $"Сканер в инвентаре - {scaner}";
+                $"Сканер в инвентаре - {scaner}\n" +
+                $"Количество сохранений - {_saveCount}";
         }
-
     }
 }

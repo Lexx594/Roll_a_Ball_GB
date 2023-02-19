@@ -22,7 +22,7 @@ namespace Maze
             {
                 _player = GameObject.Find("Player").gameObject;
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 Debug.Log("NullReferenceException");
             }
@@ -34,7 +34,7 @@ namespace Maze
             {
                 Debug.Log("NullReferenceException");
             }
-                        
+
             Invoke(nameof(Explosion), 3f);
             _audsActive.Play();
         }
@@ -53,10 +53,10 @@ namespace Maze
                 Rigidbody rb = overlappedColliders[i].attachedRigidbody;
                 if (rb != null)
                 {
-                    var direction = rb.transform.position - transform.position;
+                    var direction = rb.transform.position - (transform.position + Vector3.up * 2.2f);
                     RaycastHit hit;
-                    Ray ray = new Ray(transform.position, direction);
-
+                    Ray ray = new Ray(transform.position + Vector3.up * 2.2f, direction);
+                    
                     if (Physics.Raycast(ray, out hit, _radius))
                     {
                         if (hit.collider != null)
@@ -80,6 +80,7 @@ namespace Maze
                                 if (enemy != null)
                                 {
                                     _enemySpawn.GetComponent<EnemySpawn>().leftKillEnemy -= 1;
+                                    _enemySpawn.GetComponent<EnemySpawn>().SpawnDeathEnemy(enemy.transform.position);
                                     enemy.EnemyDestroy();
                                 }
                             }
@@ -92,7 +93,9 @@ namespace Maze
 
 
         public void BombDestroy() { Destroy(gameObject); }
-
-
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawLine(transform.position + Vector3.up * 3, _player.transform.position);
+        }
     }
 }

@@ -29,12 +29,12 @@ namespace Maze
                 Interaction();
             }
 
-            if (other.tag == "Bomb" || other.tag == "Bonus")
-            {
-                throw new Exception("два интерактивных объекта в одной точке");
+            //if (other.tag == "Bomb" || other.tag == "Bonus")
+            //{
+            //    throw new Exception("два интерактивных объекта в одной точке");
                 
-                //CollisionOfTwoObjects();                                
-            }
+            //    //CollisionOfTwoObjects();                                
+            //}
         }
     }
 }

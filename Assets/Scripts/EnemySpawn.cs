@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,12 +10,14 @@ namespace Maze
 
     public class EnemySpawn : MonoBehaviour
     {
-        [SerializeField] private GameObject _EnemyPrefab;
+        [SerializeField] private GameObject _enemyPrefab;
+        [SerializeField] private List<GameObject> _enemyDeathPrefabs;
         [SerializeField] private List<Transform> _spawnPoints;
         [SerializeField] private int _maxEnemys;
         [SerializeField] private int _minEnemys;
         [SerializeField] private TextMeshProUGUI _leftEnemy;
-        private int _enemyCount;
+        [SerializeField] private LayerMask _whatIsGround;
+        public int enemyCount;
         public int leftKillEnemy;
 
         private void Awake()
@@ -22,55 +25,66 @@ namespace Maze
             _spawnPoints = new List<Transform>(_spawnPoints);
             _maxEnemys = DataHolder.maxEnemys;
             _minEnemys = DataHolder.minEnemys;
-            _enemyCount = UnityEngine.Random.Range(_minEnemys, _maxEnemys + 1);
+            enemyCount = UnityEngine.Random.Range(_minEnemys, _maxEnemys + 1);
             SpawnEnemy();
-            if (_enemyCount == 1)
+            if (enemyCount == 1)
             {
                 _leftEnemy.text = "Для победы необходимо учичтожить одного противника";
             }
-            else if (_enemyCount == 2 || _enemyCount == 3 || _enemyCount == 4)
+            else if (enemyCount == 2 || enemyCount == 3 || enemyCount == 4)
             {
-                _leftEnemy.text = $"Для победы необходимо учичтожить {_enemyCount} противника";
+                _leftEnemy.text = $"Для победы необходимо учичтожить {enemyCount} противника";
             }
-            else if (_enemyCount == 5 || _enemyCount == 6 || _enemyCount == 7 || _enemyCount == 8 || _enemyCount == 9 || _enemyCount == 10)
+            else if (enemyCount == 5 || enemyCount == 6 || enemyCount == 7 || enemyCount == 8 || enemyCount == 9 || enemyCount == 10)
             {
-                _leftEnemy.text = $"Для победы необходимо учичтожить {_enemyCount} противников";
+                _leftEnemy.text = $"Для победы необходимо учичтожить {enemyCount} противников";
             }
-            leftKillEnemy = _enemyCount;
+            leftKillEnemy = enemyCount;
         }
 
         private void Update()
         {
-            if(leftKillEnemy < _enemyCount)
-            {
-                if (leftKillEnemy == 1)
-                {
-                    _leftEnemy.text = "Остался последний противник";
-                }
-                else if (leftKillEnemy == 2 || leftKillEnemy == 3 || leftKillEnemy == 4)
-                {
-                    _leftEnemy.text = $"Осталось {leftKillEnemy} противника";
-                }
-                else if (leftKillEnemy == 5 || leftKillEnemy == 6 || leftKillEnemy == 7 || leftKillEnemy == 8 || leftKillEnemy == 9 )
-                {
-                    _leftEnemy.text = $"Осталось {leftKillEnemy} противников";
-                }
-            }
-            if (leftKillEnemy == 0)
-            {
-                SceneManager.LoadScene(4);
-            }
+            if (leftKillEnemy != enemyCount) CheckKillEnemy();
+            if (leftKillEnemy == 0) SceneManager.LoadScene(4);
+        }
 
+        public void CheckKillEnemy()
+        {
+            
+        if (leftKillEnemy == 1)
+            {
+                 _leftEnemy.text = "Остался последний противник";
+            }
+            else if (leftKillEnemy == 2 || leftKillEnemy == 3 || leftKillEnemy == 4)
+            {
+                 _leftEnemy.text = $"Осталось {leftKillEnemy} противника";
+            }
+            else if (leftKillEnemy == 5 || leftKillEnemy == 6 || leftKillEnemy == 7 || leftKillEnemy == 8 || leftKillEnemy == 9 || leftKillEnemy == 10)
+            {
+                 _leftEnemy.text = $"Осталось {leftKillEnemy} противников";
+            }
         }
 
         private void SpawnEnemy()
         {
-            for (int i = 0; i < _enemyCount; i++)
+            for (int i = 0; i < enemyCount; i++)
             {
                 var spawn = UnityEngine.Random.Range(0, _spawnPoints.Count);
-                Instantiate(_EnemyPrefab, _spawnPoints[spawn].transform.position, Quaternion.identity);
+                Instantiate(_enemyPrefab, _spawnPoints[spawn].transform.position, Quaternion.identity);
                 _spawnPoints.RemoveAt(spawn);
             }
+        }
+
+        public void SpawnDeathEnemy(Vector3 position)
+        {
+            RaycastHit hit;
+            Ray ray = new Ray(position, Vector3.down);
+
+            if (Physics.Raycast(ray, out hit, 2f, _whatIsGround))
+            {
+                int i = UnityEngine.Random.Range(0, _enemyDeathPrefabs.Count);
+                Instantiate(_enemyDeathPrefabs[i], hit.point, Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.up) );
+            }                
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Maze
         public bool _playerInSightRange, _playerInAttackRange;
 
 
-        private Vector3 _walkPoint;
+        public Vector3 walkPoint;
         private bool _walkPointSet;
         [SerializeField] private float _walkPointRange; 
 
@@ -96,11 +96,11 @@ namespace Maze
             //если точка патрулирования не задана создаем новую точку патрулирования
             if (!_walkPointSet && _isWait) SearchWalkPoint();
             //если точка патрулирования задана, то агент устанавливает точку патрулирования
-            if (_walkPointSet) _agent.SetDestination(_walkPoint);
+            if (_walkPointSet) _agent.SetDestination(walkPoint);
             // расчитываем растояние до точки патрулирования
-            Vector3 distanceToWalkPoint = transform.position - _walkPoint;
+            Vector3 distanceToWalkPoint = transform.position - walkPoint;
             //если растояние меньше 1, то мы пришли
-            if (distanceToWalkPoint.magnitude < 1f)
+            if (distanceToWalkPoint.magnitude < 2f)
             {
                 // точка патрулирования не установлена
                 _walkPointSet = false;
@@ -122,9 +122,9 @@ namespace Maze
             float randomZ = Random.Range(-_walkPointRange, _walkPointRange);
             float randomX = Random.Range(-_walkPointRange, _walkPointRange);
                         
-            _walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-            if (Physics.Raycast(_walkPoint, -transform.up, 2f, whatIsGround))
+            if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
             {                
                 _walkPointSet = true;
             }

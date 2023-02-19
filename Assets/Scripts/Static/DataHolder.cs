@@ -13,5 +13,7 @@ namespace Maze
         public static int bombs;
         public static int map;
         public static int scaner;
+        public static int saveCount;
+        public static bool replayGame;
     }
 }

@@ -472,6 +472,19 @@ MonoBehaviour:
   _spawnBonus: {fileID: 0}
   _audsActive: {fileID: 4671003433883372723}
   _audsExplosion: {fileID: 3402739907886059740}
+--- !u!114 &1308232426712594381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074713862955541537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32e43e4fdb325d4fbfb77288ce1e1e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectName: Bomb
 --- !u!4 &5504163265330818132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5830794085472444084, guid: 732e12a252da64507987819a344450d8, type: 3}

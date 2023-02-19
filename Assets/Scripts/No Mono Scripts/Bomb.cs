@@ -70,6 +70,7 @@ namespace Maze
                     if (enemy != null)
                     {
                         _enemySpawn.GetComponent<EnemySpawn>().leftKillEnemy -= 1;
+                        _enemySpawn.GetComponent<EnemySpawn>().SpawnDeathEnemy(enemy.transform.position);
                         enemy.EnemyDestroy();
                     }
                 }
