@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Maze
 {
@@ -10,8 +11,8 @@ namespace Maze
 
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private AudioSource _audsStep;
-
-
+        [SerializeField] private ParticleSystem _lightning;
+        [SerializeField] private float _attackForce;
         private GameObject _player;
         private Rigidbody _rb;
         public LayerMask whatIsGround, whatIsPlayer;
@@ -65,13 +66,34 @@ namespace Maze
                 }                             
                 
             }
-            //if (_playerInSightRange && _playerInAttackRange && !_isDeath) AttackPlayer();
+            if (_playerInSightRange && _playerInAttackRange && !_isDeath && !_player.GetComponent<Healthbar>()._freezeHealth
+                && !_player.GetComponent<PlayerBall>()._isDisembodied) AttackPlayer();
+
 
             if (_agent.velocity.magnitude != 0f)_step = true;
             else _step = false;
             Step();
 
 
+        }
+
+        private void AttackPlayer()
+        {
+            //останавливаем врага на диапозоне атаки (враг больше не преследует игрока)
+            _agent.SetDestination(transform.position);
+            //наводимся на игрока
+            transform.LookAt(_player.transform);
+            _lightning.Play();
+            _player.GetComponent<Healthbar>()._playerHealth -= 33.5f;
+            _player.GetComponent<Healthbar>().FreezeHealthOnAvtoOff();            
+            Vector3 movement = new Vector3(_player.transform.position.x - transform.position.x, 0.0f, _player.transform.position.z - transform.position.z);
+            if (_player.GetComponent<Healthbar>()._playerHealth > 33f) _player.GetComponent<Rigidbody>().AddForce(movement * _attackForce, ForceMode.Impulse);
+            Invoke(nameof(ResetAttack), 1f);            
+        }
+
+        void ResetAttack()
+        {
+            _lightning.Stop();
         }
 
         void Step()

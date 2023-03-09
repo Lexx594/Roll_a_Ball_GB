@@ -2857,6 +2857,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 980359830702859995, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 981434068811208371, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -2961,6 +2965,7 @@ PrefabInstance:
     - {fileID: 981434068811208375, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
     - {fileID: 427643282971521004, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
     - {fileID: 1444348224039013752, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
+    - {fileID: 981434067874663464, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2f3f0d606f94c3d468f7533edd4f3e33, type: 3}
 --- !u!4 &1434679177 stripped
 Transform:

@@ -13,6 +13,7 @@ namespace Maze
         [SerializeField] private Button _quit;
         [SerializeField] private Button _back;
         [SerializeField] private GameObject _panelMenu;
+        [SerializeField] private GameObject _helpMenu;
         [SerializeField] private Slider _sliderVolume;
 
         [SerializeField] private AudioSource _audsClick;
@@ -60,10 +61,20 @@ namespace Maze
                 if (!_isPaused) Pause();
                 else Resume();
             }
+
+            if (Input.GetKeyUp(KeyCode.F1))
+            {
+                _helpMenu.SetActive(true);
+                Time.timeScale = 0f;
+            }
+
+
+
         }
 
         public void Resume()
-        {            
+        {
+            _helpMenu.SetActive(false);
             _panelMenu.SetActive(false);
             _isPaused = false;
             Time.timeScale = 1f;

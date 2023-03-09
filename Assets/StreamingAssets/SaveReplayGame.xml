@@ -34,17 +34,9 @@
     <ItemData>
       <name>Bomb(Clone)</name>
       <position>
-        <x>9.57</x>
+        <x>14.42</x>
         <y>0</y>
-        <z>-8.57</z>
-      </position>
-    </ItemData>
-    <ItemData>
-      <name>Bomb(Clone)</name>
-      <position>
-        <x>-18.63</x>
-        <y>0</y>
-        <z>6.44</z>
+        <z>10.38</z>
       </position>
     </ItemData>
     <ItemData>
@@ -58,15 +50,47 @@
     <ItemData>
       <name>Bomb(Clone)</name>
       <position>
-        <x>-7.53</x>
+        <x>14.53</x>
         <y>0</y>
-        <z>22.52</z>
+        <z>-4.41</z>
       </position>
     </ItemData>
     <ItemData>
       <name>Bomb(Clone)</name>
       <position>
-        <x>22.55</x>
+        <x>-17.64</x>
+        <y>0</y>
+        <z>12.53</z>
+      </position>
+    </ItemData>
+    <ItemData>
+      <name>Bomb(Clone)</name>
+      <position>
+        <x>-7.53</x>
+        <y>0</y>
+        <z>13.63</z>
+      </position>
+    </ItemData>
+    <ItemData>
+      <name>Bomb(Clone)</name>
+      <position>
+        <x>2.57</x>
+        <y>0</y>
+        <z>1.47</z>
+      </position>
+    </ItemData>
+    <ItemData>
+      <name>Bomb(Clone)</name>
+      <position>
+        <x>10.5</x>
+        <y>0</y>
+        <z>20.47</z>
+      </position>
+    </ItemData>
+    <ItemData>
+      <name>Bomb(Clone)</name>
+      <position>
+        <x>16.58</x>
         <y>0</y>
         <z>-8.52</z>
       </position>
@@ -74,9 +98,9 @@
     <ItemData>
       <name>Bomb(Clone)</name>
       <position>
-        <x>-11.51</x>
+        <x>22.54</x>
         <y>0</y>
-        <z>8.36</z>
+        <z>14.34</z>
       </position>
     </ItemData>
     <ItemData>
@@ -87,40 +111,44 @@
         <z>9.54</z>
       </position>
     </ItemData>
-    <ItemData>
-      <name>Bomb(Clone)</name>
-      <position>
-        <x>-17.44</x>
-        <y>0</y>
-        <z>-9.46</z>
-      </position>
-    </ItemData>
-    <ItemData>
-      <name>Bomb(Clone)</name>
-      <position>
-        <x>0.56</x>
-        <y>0</y>
-        <z>22.58</z>
-      </position>
-    </ItemData>
-    <ItemData>
-      <name>Bomb(Clone)</name>
-      <position>
-        <x>-6.08</x>
-        <y>0</y>
-        <z>-4.68</z>
-      </position>
-    </ItemData>
-    <ItemData>
-      <name>Bomb(Clone)</name>
-      <position>
-        <x>-13.51</x>
-        <y>0</y>
-        <z>-22.51</z>
-      </position>
-    </ItemData>
   </ItemDatas>
   <EnemyDatas>
+    <EnemyData>
+      <name>Enemy(Clone)</name>
+      <position>
+        <x>-20.53</x>
+        <y>0</y>
+        <z>-5.49</z>
+      </position>
+      <rotation>
+        <x>-0</x>
+        <y>0</y>
+        <z>0</z>
+      </rotation>
+      <nextPointPosition>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </nextPointPosition>
+    </EnemyData>
+    <EnemyData>
+      <name>Enemy(Clone)</name>
+      <position>
+        <x>22.48</x>
+        <y>0</y>
+        <z>22.48</z>
+      </position>
+      <rotation>
+        <x>-0</x>
+        <y>0</y>
+        <z>0</z>
+      </rotation>
+      <nextPointPosition>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </nextPointPosition>
+    </EnemyData>
     <EnemyData>
       <name>Enemy(Clone)</name>
       <position>
@@ -142,63 +170,9 @@
     <EnemyData>
       <name>Enemy(Clone)</name>
       <position>
-        <x>11.54</x>
+        <x>-22.57</x>
         <y>0</y>
-        <z>-18.54</z>
-      </position>
-      <rotation>
-        <x>-0</x>
-        <y>0</y>
-        <z>0</z>
-      </rotation>
-      <nextPointPosition>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </nextPointPosition>
-    </EnemyData>
-    <EnemyData>
-      <name>Enemy(Clone)</name>
-      <position>
-        <x>-17.5</x>
-        <y>0</y>
-        <z>-17.55</z>
-      </position>
-      <rotation>
-        <x>-0</x>
-        <y>0</y>
-        <z>0</z>
-      </rotation>
-      <nextPointPosition>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </nextPointPosition>
-    </EnemyData>
-    <EnemyData>
-      <name>Enemy(Clone)</name>
-      <position>
-        <x>-5.5</x>
-        <y>0</y>
-        <z>-22.52</z>
-      </position>
-      <rotation>
-        <x>-0</x>
-        <y>0</y>
-        <z>0</z>
-      </rotation>
-      <nextPointPosition>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </nextPointPosition>
-    </EnemyData>
-    <EnemyData>
-      <name>Enemy(Clone)</name>
-      <position>
-        <x>17.93</x>
-        <y>0</y>
-        <z>9.96</z>
+        <z>8.53</z>
       </position>
       <rotation>
         <x>-0</x>
@@ -212,7 +186,7 @@
       </nextPointPosition>
     </EnemyData>
   </EnemyDatas>
-  <EnemyCount>5</EnemyCount>
-  <LeftKillEnemy>5</LeftKillEnemy>
+  <EnemyCount>4</EnemyCount>
+  <LeftKillEnemy>4</LeftKillEnemy>
   <SaveCount>2</SaveCount>
 </SavedData>

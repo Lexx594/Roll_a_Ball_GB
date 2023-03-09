@@ -17,6 +17,8 @@ namespace Maze
         [SerializeField] private int _minEnemys;
         [SerializeField] private TextMeshProUGUI _leftEnemy;
         [SerializeField] private LayerMask _whatIsGround;
+        public PlayerBall playerBall;
+        public CameraController cameraController;
         public int enemyCount;
         public int leftKillEnemy;
 
@@ -42,11 +44,23 @@ namespace Maze
             leftKillEnemy = enemyCount;
         }
 
+        bool f;
         private void Update()
         {
+            
             if (leftKillEnemy != enemyCount) CheckKillEnemy();
-            if (leftKillEnemy == 0) SceneManager.LoadScene(4);
+            if (leftKillEnemy == 0 && !f)
+            {
+                f= true;
+                Invoke(nameof(LoadWinScene), 5f);
+                playerBall.WinRobot();
+                //cameraController.Rotation();
+                //cameraController.Flay();
+                cameraController.f = true;
+            }
         }
+
+        public void LoadWinScene() { SceneManager.LoadScene(4); }
 
         public void CheckKillEnemy()
         {

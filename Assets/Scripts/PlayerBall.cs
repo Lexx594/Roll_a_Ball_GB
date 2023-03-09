@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,17 +11,18 @@ namespace Maze
         public bool _isDisembodied;
         private bool _step;
         private bool _nearEnemy;
+        [SerializeField] private GameObject _robotPrefab;
+        [SerializeField] private GameObject _deathRobotPrefab;
         private Vector3 _oldPosition;
         [SerializeField] private AudioSource _audsStep;
         [SerializeField] private AudioSource _audsNearEnemy;
         [SerializeField] private LayerMask _whatIsEnemy;
-
+        [SerializeField] private ParticleSystem _lightning;
 
         private void Start()
         {
             _oldPosition = transform.position;
         }
-
 
         void Update()
         {
@@ -43,16 +45,29 @@ namespace Maze
 
             if (transform.position != _oldPosition)_step = true;
             else _step = false;
-
             _nearEnemy = Physics.CheckSphere(transform.position, 10f, _whatIsEnemy);
-
-
-
         }
 
         void FixedUpdate()
         {
             _oldPosition = transform.position;
+        }
+
+        public void WinRobot()
+        {
+            gameObject.transform.GetChild(3).gameObject.SetActive(false);
+            Instantiate(_robotPrefab, transform.position, Quaternion.AngleAxis(70f, Vector3.up));
+        }
+
+        public void LossRobot()
+        {
+            //gameObject.transform.GetChild(4).gameObject.SetActive(true);
+
+            gameObject.transform.GetChild(3).gameObject.SetActive(false);
+            gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            Instantiate(_deathRobotPrefab, transform.position, Quaternion.AngleAxis(70f, Vector3.up));
+            _lightning.Play();
         }
 
 

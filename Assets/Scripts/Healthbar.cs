@@ -9,23 +9,27 @@ namespace Maze
     public class Healthbar : MonoBehaviour
     {
         public float _playerHealth = 100;
-        [SerializeField] private Image _currentHealthBar;        
+        [SerializeField] private Image _currentHealthBar;
         public bool _freezeHealth;
-        
-        
+        public CameraController cameraController;
+
         // Start is called before the first frame update
         void Start()
         {
 
         }
-
+        bool f;
         // Update is called once per frame
         void Update()
         {
             _currentHealthBar.fillAmount = _playerHealth/100;
-            if (_playerHealth < 0f)
+            if (_playerHealth < 0f && !f)
             {
-                SceneManager.LoadScene(3);
+                f = true;
+                Invoke(nameof(LoadLosScene), 5f);
+                cameraController.f = true;
+                gameObject.GetComponent<PlayerBall>().LossRobot();
+
             }
 
             if (_playerHealth > 100f)
@@ -34,16 +38,19 @@ namespace Maze
             }           
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            //Debug.Log($" Столкновение с {other.name}");
+        public void LoadLosScene() { SceneManager.LoadScene(3); }
 
-            if (other.tag == "Enemy" && !_freezeHealth && !gameObject.GetComponent<PlayerBall>()._isDisembodied)
-            {
-                _playerHealth -= 33.5f;
-                FreezeHealthOnAvtoOff();
-            }            
-        }
+
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    //Debug.Log($" Столкновение с {other.name}");
+
+        //    if (other.tag == "Enemy" && !_freezeHealth && !gameObject.GetComponent<PlayerBall>()._isDisembodied)
+        //    {
+        //        _playerHealth -= 33.5f;
+        //        FreezeHealthOnAvtoOff();
+        //    }            
+        //}
 
         public void FreezeHealthOn()
         {
@@ -57,7 +64,6 @@ namespace Maze
             gameObject.transform.GetChild(1).gameObject.SetActive(true);
             Invoke(nameof(FreezeHealthOff), 10f);
         }
-
 
         public void FreezeHealthOff()
         { 
